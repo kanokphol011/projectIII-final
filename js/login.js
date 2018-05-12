@@ -71,5 +71,29 @@
         
     });
     
-
+    $("#login").click(function() {
+        var url = "https://customer-api-shopping.herokuapp.com/api/customers/";
+        url += "name=" + $("#name").val();
+        url += "&password=" + $("#password").val();
+        console.log(url);
+        $.get(url, function(data, status) {
+            console.log(data);
+            console.log(status);
+            if (status == 'success') {
+                console.log($("#name").val());
+                console.log($("#password").val());
+                console.log(data[0].name);
+                console.log(data[0].password);
+                if($("#username").val() == data[0].name && $("#password").val() == data[0].password){
+                $("#suc").show();
+                console.log("Success");
+                console.log(data.name);
+                setTimeout(window.location.href = "index.html?id=" + data[0].id);
+                }
+            } else {
+                $("#err").show();
+            
+             }
+        });
+    });
 })(jQuery);
